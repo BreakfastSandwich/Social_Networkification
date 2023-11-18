@@ -21,11 +21,12 @@ const userSchema = new Schema(
       thoughts: [Thoughts]
     },
 
-    friends: {
-      thoughts: [userSchema]
-
-    },
-    
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Student',
+      },
+    ],
   },
 
   {
@@ -37,22 +38,13 @@ const userSchema = new Schema(
 );
 
 const User = model('user', userSchema);
-// ?? ----------------------------------
-friendcount
-  .virtual('fullName')
-  // Getter
-  .get(function () {
-    return `${this.first} ${this.last}`;
-  })
-  
-  // Setter to set the first and last name
-  .set(function (v) {
-    const first = v.split(' ')[0];
-    const last = v.split(' ')[1];
-    this.set({ first, last });
-  });
 
-// ----------------------------------------
+friendcount
+  .virtual('friends')
+  .get(function () {
+    return `${this.friends.length} `;
+  })
+
 
 
 

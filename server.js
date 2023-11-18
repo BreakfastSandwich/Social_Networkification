@@ -1,5 +1,8 @@
 const express = require('express');
 const db = require('./config/connection');
+const app = express();
+const PORT = process.env.PORT || 3001;
+app.listen(`${PORT}`, () => console.log(`server started on ${PORT}`))
 
 
 const { Reaction } = require('./Reatction');
@@ -7,8 +10,8 @@ const { Thought } = require('./Thought');
 const { User } = require('./User');
 const Thoughts = require('./models/Thought');
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
